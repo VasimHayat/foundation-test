@@ -1,0 +1,17 @@
+import { FnSession, FnSessionState } from './fn.session.model';
+import * as fnSessionAction from '../action/fn-seesion.action';
+export declare const getCurrentSession: import("@ngrx/store").MemoizedSelector<object, FnSession, import("@ngrx/store").DefaultProjectorFn<FnSession>>;
+export declare const getCurrent_ssPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurretn_sccPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_scaPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_saPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_scPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_scuPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_sauPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_wIndex: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_pid: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const getCurrent_pmid: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const getCurrent_mid: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const getCurrent_sgaPK: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const getCurrent_baseUrl: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare function fnSessionReducer(state: FnSessionState, action: fnSessionAction.FnSessionActions): FnSessionState;

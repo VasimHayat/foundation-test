@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FnUiFieldMetaDataService } from 'lib/foundation';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,81 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'foundation-test';
+
+  user = {
+    isActive: true,
+    email: 'jack@martin.com',
+    password: ''
+  };
+
+  constructor(private metaDataSvcs: FnUiFieldMetaDataService) {
+    this.loadFiledMetaData();
+  }
+
+
+
+  loadFiledMetaData() {
+    this.metaDataSvcs.setFieldMap(
+      {
+        email: {
+
+          isRequired: true,
+          isEnableOnUI: true,
+          labelIDArray: [
+            'Entity_EOEmpMain_Field_jobCodeDescription_LBL',
+            'Entity_EOEmpMain_Field_jobCodeDescription_HVR'
+          ],
+          minLength: 5,
+          isInitialized: true,
+          isShowInfo: false,
+          labelPosition: 'left',
+          recalAccess: false,
+          typeID: {
+            iid: 'EMAIL',
+            isNumber: false,
+            defaultTableWidth: 50,
+            defaultEditWidth: 20
+          },
+          applicablePK: 0,
+          id: 'Entity_EOEmpMain_Field_jobCodeDescription',
+          isDisabled: false,
+          key: 'email',
+          maxLength: 255,
+          isDynDetailKey: false,
+          hideLabel: false
+        },
+        password: {
+
+          isRequired: true,
+          isEnableOnUI: true,
+          labelIDArray: [
+            'Entity_EOEmpMain_Field_jobCodeDescription_LBL',
+            'Entity_EOEmpMain_Field_jobCodeDescription_HVR'
+          ],
+          minLength: 8,
+          isInitialized: true,
+          isShowInfo: false,
+          labelPosition: 'left',
+          recalAccess: false,
+          typeID: {
+            iid: 'PASSWORD',
+            isNumber: false,
+            defaultTableWidth: 50,
+            defaultEditWidth: 20
+          },
+          applicablePK: 0,
+          id: 'Entity_EOEmpMain_Field_PASSWORD',
+          isDisabled: false,
+          key: 'password',
+          maxLength: 255,
+          isDynDetailKey: false,
+          hideLabel: false
+        }
+      },
+    );
+  }
+
+  onSubmit(_form) {
+
+  }
 }

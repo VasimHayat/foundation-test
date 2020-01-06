@@ -1,0 +1,31 @@
+import { ElementRef, TemplateRef, ChangeDetectorRef, OnDestroy, AfterContentInit } from '@angular/core';
+import { ContentObserver } from '@angular/cdk/observers';
+export declare type FnButtonType = 'primary' | 'success' | 'danger' | 'default' | 'link';
+export declare type FnButtonShape = 'circle' | 'round' | null;
+export declare class FnButtonComponent implements OnDestroy, AfterContentInit {
+    private elementRef;
+    private cdr;
+    private contentObserver;
+    id: string;
+    type: FnButtonType;
+    shape: FnButtonShape;
+    text: string;
+    iconAddonBefore: string;
+    iconAddonAfter: string;
+    height: string;
+    width: string;
+    disabled: any;
+    flatBorder: boolean;
+    template: TemplateRef<any>;
+    outline: boolean;
+    isLoading: boolean;
+    indexShortcut: number;
+    textLoading: any;
+    buttonElement: ElementRef;
+    private _textLoading;
+    private destroy$;
+    constructor(elementRef: ElementRef, cdr: ChangeDetectorRef, contentObserver: ContentObserver);
+    ngAfterContentInit(): void;
+    ngOnDestroy(): void;
+    checkContent(): void;
+}

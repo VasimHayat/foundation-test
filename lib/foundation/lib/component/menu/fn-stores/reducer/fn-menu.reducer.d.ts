@@ -1,0 +1,11 @@
+import { FnMenuItemState, FnMenuState } from '../models/fn-menu.state';
+import { FnMenuActions } from '../actions/fn-menu.action';
+export declare const getMenuData: import("@ngrx/store").MemoizedSelector<object, FnMenuItemState, import("@ngrx/store").DefaultProjectorFn<FnMenuItemState>>;
+export declare const getRooMenuId: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const getActiveMenuId: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const getMenuItemMap: import("@ngrx/store").MemoizedSelector<object, object, import("@ngrx/store").DefaultProjectorFn<object>>;
+export declare const getMenuDetailItemMap: import("@ngrx/store").MemoizedSelector<object, object, import("@ngrx/store").DefaultProjectorFn<object>>;
+export declare const getMenuItemById: import("@ngrx/store").MemoizedSelectorWithProps<object, any, any, import("@ngrx/store").DefaultProjectorFn<any>>;
+export declare const getActiveMenuItem: import("@ngrx/store").MemoizedSelector<object, any, import("@ngrx/store").DefaultProjectorFn<any>>;
+export declare const getMenuStatus: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare function FnMenuReducer(state: FnMenuState, action: FnMenuActions): FnMenuState;

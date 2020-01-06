@@ -1,0 +1,33 @@
+export declare class FNExceptionJson {
+    id: string;
+    appID: string;
+    appVer: any;
+    language: string;
+    langVersion: any;
+    deviceType: string;
+    deviceVersion: any;
+    deviceBrand: string;
+    deviceTime: any;
+    osType: any;
+    osVersion: any;
+    page: string;
+    custUserEmailID: string;
+    customerEmailID: string;
+    siteMainID: string;
+    custUserPK: any;
+    customerPk: any;
+    sitePk: any;
+    expMessage: string;
+    rootExpLineNum: number;
+    rootStackTrace: string;
+    expStackTrace: any;
+    selectedObjectHash: any;
+    className: string;
+    methodName: string;
+    categoryName: string;
+    threadName: string;
+    lastAction: string;
+    severity: string;
+    constructor(exception: any);
+    init(exception: any): void;
+}
