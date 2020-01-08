@@ -29,3 +29,4 @@ export * from './lib/component/select/index';
 export * from './lib/component/dialog/index';
 export * from './lib/component/time/index';
 export * from './lib/component/color-picker/index';
+export * from './lib/component/date-picker/index';

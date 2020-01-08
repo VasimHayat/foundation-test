@@ -4,6 +4,7 @@
 export * from './public-api';
 export { FnButtonComponent as ɵm } from './lib/component/button/fn-button-component';
 export { FnColorPickerComponent as ɵy } from './lib/component/color-picker/fn-color-picker.component';
+export { FnDatePickerComponent as ɵz } from './lib/component/date-picker/fn-date-picker.component';
 export { DialogData as ɵu } from './lib/component/dialog/fn-dialog.model';
 export { FnIconComponent as ɵk } from './lib/component/icons/fn-icon.component';
 export { FnFaIconComponent as ɵl } from './lib/component/icons/parts/fa-icon/fn-fa-icon.component';
