@@ -27,7 +27,7 @@
     "bootstrap": "^4.4.1",
     "classlist.js": "^1.1.20150312",
     "font-awesome": "^4.7.0",
-    "foundation": "E:/Samples-Resources/Angular_Office_Demo/foundation-test/lib/foundation",
+    "foundation": "./lib/foundation",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.4.1",
     "ngx-color-picker": "^8.2.0",
@@ -35,7 +35,8 @@
     "stacktrace-js": "^2.0.1",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@ngx-translate/core": "^11.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",
