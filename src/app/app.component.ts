@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FnUiFieldMetaDataService } from 'lib/foundation';
+import { FnUiFieldMetaDataService, FnI18nService } from 'foundation';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,12 @@ export class AppComponent {
     password: ''
   };
 
-  constructor(private metaDataSvcs: FnUiFieldMetaDataService) {
+  constructor(private metaDataSvcs: FnUiFieldMetaDataService,private transService:FnI18nService) {
     this.loadFiledMetaData();
+  }
+
+  selectLanguage(lang){
+    this.transService.setLanguage(lang);
   }
 
 

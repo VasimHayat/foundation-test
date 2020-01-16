@@ -1,8 +1,13 @@
 <div class="container">
   <div class="well">
+  <app-header-component></app-header-component>
+  </div>
+</div>
+<div class="container">
+  <div class="well">
     <div style="padding-top:100px;text-align: center;">
       <label>
-        Date :
+        {{'app.date' | fnTranslate}} :
       </label>
       <fn-date-picker [selectedDate]="dateObject.startDate" (callback)="changeDate($event)"
         (dateDisabled)="disabledDate($event)" (nextDisabledCallback)="nextDisable($event)"
@@ -16,20 +21,27 @@
 
     <div class="col">
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
+        <label for="exampleInputEmail1">{{'app.email' | fnTranslate}}</label>
         <fn-input [(ngModel)]="user.email" [dataKey]="'email'" required [parentForm]="loginForm" name="Email">
         </fn-input>
       </div>
     </div>
     <div class="col">
       <div class="form-group">
-        <label>Password</label>
+        <label>{{'app.password' | fnTranslate}}</label>
         <fn-input [(ngModel)]="user.password" [dataKey]="'password'" required [parentForm]="loginForm" name="password">
         </fn-input>
       </div>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">{{'app.submit' | fnTranslate}}</button>
   </form>
+  <hr/>
+  <button class="btn btn-primary" (click)="selectLanguage('en')">English</button>
+  <button class="btn btn-primary m-5" (click)="selectLanguage('de')">German</button>
+</div>
 
-
+<div class="container">
+<div class="well lazyload-module">
+  <router-outlet></router-outlet>
+</div>
 </div>
