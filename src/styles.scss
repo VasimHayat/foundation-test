@@ -1,28 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
-@import "lib/foundation/scss/theme/button";
+
 @import "~bootstrap/scss/bootstrap.scss";
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "lib/foundation/scss/index.scss";
 
 
-body {   
-    font-family: "Source Sans Pro",Helvetica,Arial,sans-serif !important;
-    padding: 0;
-    margin: 0;
-    background-color: $primary-bg-color;
+body {
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif !important;
+  padding: 0;
+  margin: 0;
+  background-color: $primary-bg-color;
 }
+
 .content-wrapper {
-    margin-left: 50px;
-    width: calc(100% - 50px);
-    margin-top: 50px;
-    background-color: $white;
- }
-.hidden {
-    display: none !important;
-}
-input,button,textarea{
-    &:focus{
-        @include shadow-reset;
-    }
+  margin-left: 50px;
+  width: calc(100% - 50px);
+  margin-top: 50px;
+  background-color: $white;
 }
 
+.hidden {
+  display: none !important;
+}
+
+input,
+button,
+textarea {
+  &:focus {
+    @include shadow-reset;
+  }
+}
