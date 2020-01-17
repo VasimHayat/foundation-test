@@ -1,0 +1,8 @@
+@import "../theme/variable";
+@import "../theme/color";
+
+@each $colorName, $colorCode in $colorMapLight {
+  .fa-#{$colorName} {
+    color: $colorCode;
+  }
+}

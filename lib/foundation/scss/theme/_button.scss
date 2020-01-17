@@ -1,0 +1,40 @@
+@import "../component/button/fn-button-component";
+@import "../theme/mixins";
+@import "../theme/color";
+.btn-action {
+  width: auto;
+  margin: 0 5px;
+  font-size: 14px;
+  padding: 0;
+  display: inline-block;
+}
+.btn-sm {
+  height: 34px;
+  @include padding(0.25rem 0.7rem);
+}
+@each $colorName, $colorCode in $colorMapLight {
+  .btn-#{$colorName} {
+    border: 2px solid $colorCode;
+    color: $white;
+    background-color: $colorCode;
+  }
+}
+@each $colorName, $colorCode in $colorMapDark {
+  .btn-#{$colorName} {
+    &:hover,
+    &:focus,
+    &:visited,
+    &:active,
+    &:not(:disabled):not(.disabled):active {
+      border: 2px solid $colorCode;
+      color: $white;
+      background-color: $colorCode;
+    }
+  }
+}
+.btn-round{
+  @include radius(30px);
+}
+.btn-square{
+  @include radius(0px);
+}

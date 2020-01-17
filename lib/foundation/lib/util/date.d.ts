@@ -1,10 +1,10 @@
 export declare class FnDateFormatter {
-    format(d?: Date, pattern?: any, langId?: any): string;
     weekFullEn: any;
     weekJp: any;
     monthFullEn: any;
     monthOldJp: any;
     dateSuffix: any;
+    format(d?: Date, pattern?: any, langId?: any): string;
     preZero(value: any): any;
     from24to12(hours: any): any;
     ampm(hours: any): "am" | "pm";

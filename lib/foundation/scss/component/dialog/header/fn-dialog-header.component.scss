@@ -1,0 +1,103 @@
+@import "../../../theme/variable";
+@import "../../../theme/mixins";
+
+:root {
+  --modal-header-bg: $modal-header-bg;
+  --modal-header-title-color: $modal-header-title-color;
+  --modal-header-close-border: $modal-header-close-border;
+}
+
+fn-modal-header {
+  display: flex;
+  @include padding(12px 15px 12px 15px);
+  background-color: var(--modal-header-bg);
+  position: relative;
+
+  .modal-title {
+    font-size: 15px;
+    color: #494949;
+    margin: 0;
+  }
+
+  button.close {
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 13px;
+    border-radius: 10px;
+    border: 1px solid var(--modal-header-close-border);
+    height: 20px;
+    width: 20px;
+    outline: none;
+    font-size: 15px !important;
+    text-align: center;
+    line-height: 16px !important;
+
+    span {
+      vertical-align: text-top;
+    }
+  }
+
+  &.modal-header-success {
+    color: #fff;
+    background-color: $green;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+  &.modal-header-warning {
+    color: #fff;
+    background-color: $orange;
+  }
+
+  &.modal-header-danger {
+    color: #fff;
+    background-color: $red;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+  &.modal-header-info {
+    color: #fff;
+    background-color: $cyan;
+  }
+
+  &.modal-header-primary {
+    color: #fff;
+    background-color: $blue;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,68 @@
+@import "../../../theme/variable";
+@import "../../../theme/mixins";
+
+:root {
+  --list-item-hover-bg: $list-item-hover-bg;
+}
+
+fn-select {
+  ng-select {
+    &.ng-select-opened {
+      .ng-select-container {
+        .ng-arrow-wrapper {
+          .ng-arrow {
+            top: -5px !important;
+          }
+        }
+      }
+    }
+
+    .ng-select-container {
+      .ng-value-container {
+        .ng-input {
+          top: inherit !important;
+          @include padding-direction(left, 12px);
+
+          input {
+            font-size: 1rem;
+            line-height: 30px;
+          }
+        }
+      }
+
+      .ng-clear-wrapper {
+        line-height: 32px;
+      }
+
+      .ng-arrow-wrapper {
+        .ng-arrow {
+          height: 9px;
+        }
+      }
+    }
+
+    ng-dropdown-panel.ng-dropdown-panel {
+      .ng-dropdown-panel-items {
+        div.ng-option {
+          padding: 5px 10px 5px 22px !important;
+          @include transition(all 0.3s ease-in);
+
+          &.ng-option-marked {
+            background-color: var(--list-item-hover-bg);
+            color: $white;
+          }
+        }
+
+        div.ng-option-disabled,
+        div.ng-option {
+          line-height: 20px !important;
+          font-size: 14px;
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

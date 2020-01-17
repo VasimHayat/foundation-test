@@ -9,7 +9,7 @@ export declare class FnColorPickerComponent extends FnInputValueAccessor<any> im
     cancelButtonClass: string;
     isSaveClkOutside: boolean;
     outputFormat: string;
-    onChangeColor: EventEmitter<string>;
+    changeColorCb: EventEmitter<string>;
     ngOnInit(): void;
     changeColor(colorCode: string): void;
 }

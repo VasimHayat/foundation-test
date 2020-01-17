@@ -1,0 +1,7 @@
+@import '../../theme/variable';
+@import '../../theme/mixins';
+.fn-pagging-btn {
+  border: 1px solid $border-default-color;
+  padding: 3px 10px !important;
+  font-size: 12px;
+}

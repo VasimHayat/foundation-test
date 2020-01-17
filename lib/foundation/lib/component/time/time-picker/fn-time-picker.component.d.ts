@@ -12,7 +12,7 @@ export declare class FnTimePickerComponent implements OnInit {
     activeItem: number;
     constructor(timePickerSvcs: FnTimepickerService);
     ngOnInit(): void;
-    filterValue(event: KeyboardEvent): void;
+    filterValue(event: any): void;
     onItemClick(indexVal: string): void;
     closeDropDown(): void;
     clickEvent(event: KeyboardEvent): void;

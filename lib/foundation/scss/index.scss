@@ -1,0 +1,8231 @@
+/*
+  * Created By Vasim Hayat at 1/14/2020 1:40 PM
+  *
+  */
+@import "~bootstrap/scss/bootstrap.scss";
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+@function invert($color, $amount: 100%) {
+  $inverse: change-color($color, $hue: hue($color) + 180);
+  @return mix($inverse, $color, $amount);
+}
+
+.progress-bar,
+.progress-bar-data {
+  background: $progress-bar-bg;
+  @include radius(99px);
+  width: 100%;
+  height: 5px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    @include radius(99px);
+    position: absolute;
+    height: 5px;
+    content: "";
+    width: 0;
+    transition: width 0.2s;
+    color: $white;
+  }
+}
+.progress-bar-data {
+  height: 18px;
+  &::before {
+    height: 18px;
+  }
+}
+$start: 0;
+$end: 99;
+
+@for $i from $start through $end {
+  $i: 1 + $i;
+  .progress-bar-#{$i}::before {
+    width: $i * 1%;
+  }
+  .progress-bar-data-#{$i}::before {
+    width: $i * 1%;
+    content: "#{$i}%";
+    font-size: 12px;
+    text-align: right;
+    padding: 0 6px;
+  }
+  .width-#{$i} {
+    width: $i * 1%;
+  }
+}
+
+.main-header{
+    max-height: 50px;
+}
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+:root {
+  --list-item-hover-bg: $list-item-hover-bg;
+}
+
+fn-select {
+  ng-select {
+    &.ng-select-opened {
+      .ng-select-container {
+        .ng-arrow-wrapper {
+          .ng-arrow {
+            top: -5px !important;
+          }
+        }
+      }
+    }
+
+    .ng-select-container {
+      .ng-value-container {
+        .ng-input {
+          top: inherit !important;
+          @include padding-direction(left, 12px);
+
+          input {
+            font-size: 1rem;
+            line-height: 30px;
+          }
+        }
+      }
+
+      .ng-clear-wrapper {
+        line-height: 32px;
+      }
+
+      .ng-arrow-wrapper {
+        .ng-arrow {
+          height: 9px;
+        }
+      }
+    }
+
+    ng-dropdown-panel.ng-dropdown-panel {
+      .ng-dropdown-panel-items {
+        div.ng-option {
+          padding: 5px 10px 5px 22px !important;
+          @include transition(all 0.3s ease-in);
+
+          &.ng-option-marked {
+            background-color: var(--list-item-hover-bg);
+            color: $white;
+          }
+        }
+
+        div.ng-option-disabled,
+        div.ng-option {
+          line-height: 20px !important;
+          font-size: 14px;
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.ng-select {
+  .ng-select-container {
+    .ng-value-container {
+      position: relative;
+      @include padding-direction(left, 12px);
+      .ng-placeholder {
+        font-size: 16px;
+        font-weight: normal;
+        vertical-align: middle;
+        line-height: 35px;
+      }
+      .ng-value {
+        vertical-align: middle;
+        padding-top: 1px;
+        font-size: 16px;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+fn-switch {
+  button.fn-switch {
+    margin: 0;
+    padding: 0;
+    color: $white;
+    font-size: 14px;
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 44px;
+    height: 30px;
+    line-height: 28px;
+    vertical-align: middle;
+    background-color: $red;
+    @include border(1px, solid, transparent);
+    @include radius(100px);
+    cursor: pointer;
+    transition: all 0.36s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:disabled,
+    &.disabled {
+      background-color: $disabled;
+      pointer-events: none;
+    }
+
+    .checked-text {
+      display: none;
+    }
+
+    .unchecked-text {
+      display: block;
+    }
+
+    &:after {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 26px;
+      height: 26px;
+      background-color: $white;
+      border-radius: 26px;
+      cursor: pointer;
+      transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      content: "|||";
+      box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+      font-size: 9px;
+      line-height: 25px;
+      letter-spacing: 2px;
+      text-indent: 2px;
+      color: $switch-button;
+    }
+
+    span.fn-switch-inner {
+      display: block;
+      margin-right: 12px;
+      margin-left: 34px;
+      color: $white;
+      font-size: 14px;
+    }
+
+    &.fn-switch-checked {
+      background-color: $blue;
+
+      &:after {
+        left: 100%;
+        margin-left: -1px;
+        transform: translateX(-100%);
+      }
+
+      span.fn-switch-inner {
+        margin-right: 34px;
+        margin-left: 12px;
+      }
+
+      .checked-text {
+        display: block;
+      }
+
+      .unchecked-text {
+        display: none;
+      }
+    }
+
+    /*large switch css start*/
+    &.fn-switch-large {
+      min-width: 48px;
+      height: 36px;
+      line-height: 14px;
+
+      .fn-switch-inner {
+        margin-right: 14px;
+        margin-left: 42px;
+        font-size: 16px;
+      }
+
+      &.fn-switch-checked {
+        .fn-switch-inner {
+          margin-right: 42px;
+          margin-left: 14px;
+        }
+      }
+
+      &:after {
+        width: 32px;
+        height: 32px;
+        font-size: 10px;
+        line-height: 22px;
+        line-height: 31px;
+      }
+    }
+
+
+    /*large switch css end*/
+    /*small switch css start*/
+    &.fn-switch-small {
+      min-width: 38px;
+      height: 24px;
+      line-height: 18px;
+
+      .fn-switch-inner {
+        margin-right: 10px;
+        margin-left: 25px;
+        font-size: 12px;
+      }
+
+      &.fn-switch-checked {
+        .fn-switch-inner {
+          margin-right: 25px;
+          margin-left: 10px;
+        }
+      }
+
+      &:after {
+        width: 20px;
+        height: 20px;
+        font-size: 6px;
+        line-height: 20px;
+      }
+    }
+
+    /*small switch css end*/
+  }
+
+}
+
+
+
+
+
+
+
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+$labelWidth: 50%;
+
+.switch {
+  position: relative;
+  margin: 20px auto;
+  height: 35px;
+  width: $labelWidth * 2;
+  background: rgba($black, 0.5);
+  @include radius(20px);
+  @include box-shadow(inset 0 1px 3px rgba($black, 0.3), 0 1px rgba($white, 0.1));
+  .switch-input {
+    display: none;
+
+    &:checked + .switch-label {
+      font-weight: bold;
+      color: rgba($black, 0.65);
+      text-shadow: 0 1px rgba($white, 0.25);
+      @include transition(0.15s ease-out);
+    }
+
+    &:checked + .switch-label-on ~ .switch-selection {
+      left: $labelWidth; /* Note: left: 50% doesn't transition in WebKit */
+    }
+  }
+  .switch-label {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: $labelWidth;
+    line-height: 35px;
+    font-size: 15px;
+    color: rgba($white, 0.9);
+    text-align: center;
+    text-shadow: 0 1px 1px rgba($black, 0.45);
+    cursor: pointer;
+    font-weight: normal;
+    &:active {
+      font-weight: bold;
+    }
+  }
+  .switch-label-off {
+    @include padding-direction(left, 0px);
+  }
+  .switch-label-on {
+    @include padding-direction(right, 0px);
+  }
+  .switch-selection {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    left: 0px;
+    width: $labelWidth;
+    height: 35px;
+    background: $white;
+    @include radius(16px);
+    //@include linear-gradient(top, $switch-gradient, $white);
+    @include box-shadow(inset 10px 8px rgba($white, 0.5), 3px 3px 6px rgba($black, 0.2));
+    @include transition(left 0.15s ease-out);
+
+    &.switch-blue {
+      background: $blue;
+      @include linear-gradient(top, $blue, $cyan);
+    }
+
+    &.switch-yellow {
+      background: $yellow;
+      @include linear-gradient(top, $yellow, $orange);
+    }
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+#fn-search-input {
+  @include padding-reset;
+  border: solid 1px $border-default-color;
+  @include radius(6px);
+  background-color: $white;
+
+  input {
+    @include border-reset;
+    box-shadow: none;
+  }
+
+  button {
+    @include margin-reset;
+    background: none;
+    box-shadow: none;
+    @include border-reset;
+    color: $gray;
+    @include padding(4px 8px 4px 10px);
+    border-left: solid 1px $border-default-color;
+
+    &:hover {
+      @include border-reset;
+      box-shadow: none;
+      border-left: solid 1px $border-default-color;
+    }
+  }
+
+  .glyphicon-search {
+    font-size: 23px;
+  }
+}
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+table.table {
+  background-color: $white;
+  color: $table-text-color;
+  .table-shadow {
+    @include shadow(3px, 5px, 10px, $table-shadow);
+  }
+  thead {
+    &.grey.lighten-2 {
+      background-color: $gray-head-bg;
+    }
+    &.black.white-text {
+      background-color: $black !important;
+      tr {
+        th {
+          color: $white !important;
+        }
+      }
+    }
+    tr {
+      th {
+        font-size: 0.9em;
+        @include padding(8px 10px 8px 10px);
+        border: 0 !important;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        font-size: 0.9em;
+        font-weight: normal;
+        padding: 8px 10px !important;
+      }
+      th {
+        font-size: 0.7em;
+        padding: 8px 10px !important;
+      }
+    }
+  }
+  &.table-bordered {
+    th,
+    td {
+      border: 1px solid $table-border-color;
+    }
+  }
+  th,
+  td {
+    border-top: 1px solid $table-border-color;
+  }
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(odd) {
+        background-color: $table-stripped-bg;
+      }
+    }
+  }
+  &.table-hover {
+    tbody {
+      tr:hover {
+        background-color: $table-hover-bg !important;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+fn-input {
+  position: relative;
+  width: 100%;
+  float: left;
+  fn-base-input {
+    .fn-input-box {
+      position: relative;
+      input.fn-input,
+      input.form-control {
+        box-sizing: border-box;
+        width: 100%;
+        height: 34px;
+        @include border(1px, solid, $border-default-color);
+        @include shadow-reset;
+        background-color: $white;
+        color: $input-text-color;
+        outline: none;
+        @include padding(6px 12px 6px 12px);
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-image: none;
+        @include transition(all 0.2s linear);
+        @include radius(4px);
+        display: inline-block;
+        position: relative;
+        &:focus, &:visited, &:active{
+          border-color: $input-focus-border-color;
+        }
+        &[disabled] {
+          color: $input-disable-color;
+          background-color: $input-disable-bg;
+          cursor: not-allowed;
+          opacity: 1;
+        }
+        &:placeholder-shown {
+          text-overflow: ellipsis;
+          color: $input-placeholder-color;
+        }
+        &::placeholder {
+          color: $input-placeholder-color;
+        }
+        &.input-rounded {
+          @include radius(25px);
+        }
+        
+      }
+      textarea.fn-input {
+        max-width: 100%;
+        height: auto;
+        min-height: 32px;
+        line-height: 1.5;
+        vertical-align: bottom;
+        transition: all 0.3s, height 0s;
+      }
+    }
+  }
+}
+
+
+
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+fn-input {
+  position: relative;
+  width: 100%;
+  float: left;
+  fn-base-input {
+    .fn-input-box {
+      position: relative;
+      input.fn-input,
+      input.form-control {
+        box-sizing: border-box;
+        width: 100%;
+        height: 34px;
+        @include border(1px, solid, $border-default-color);
+        @include shadow-reset;
+        background-color: $white;
+        color: $input-text-color;
+        outline: none;
+        @include padding(6px 12px 6px 12px);
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-image: none;
+        @include transition(all 0.2s linear);
+        @include radius(4px);
+        display: inline-block;
+        position: relative;
+        &:focus, &:visited, &:active{
+          border-color: $input-focus-border-color;
+        }
+        &[disabled] {
+          color: $input-disable-color;
+          background-color: $input-disable-bg;
+          cursor: not-allowed;
+          opacity: 1;
+        }
+        &:placeholder-shown {
+          text-overflow: ellipsis;
+          color: $input-placeholder-color;
+        }
+        &::placeholder {
+          color: $input-placeholder-color;
+        }
+        &.input-rounded {
+          @include radius(25px);
+        }
+        
+      }
+      textarea.fn-input {
+        max-width: 100%;
+        height: auto;
+        min-height: 32px;
+        line-height: 1.5;
+        vertical-align: bottom;
+        transition: all 0.3s, height 0s;
+      }
+    }
+  }
+}
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+
+.fn-msg-err {
+  color: $white;
+  position: absolute;
+  z-index: 1;
+  background: $error-msg-bg;
+  @include padding(6px 10px);
+  @include margin-reset;
+  width: max-content;
+  @include radius(4px);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-style: solid;
+  }
+  &.top {
+    bottom: calc(100% + 7px);
+    left: 0;
+    &:before {
+      top: 100%;
+      left: 10px;
+      border-width: 8px 8px 0px;
+      border-color: $error-msg-bg transparent transparent;
+    }
+  }
+  &.bottom {
+    top: calc(100% + 7px);
+    left: 0;
+    &:before {
+      bottom: 100%;
+      left: 10px;
+      border-width: 0 8px 8px;
+      border-color: transparent transparent $error-msg-bg;
+    }
+  }
+  &.left {
+    top: 0;
+    right: calc(100% + 7px);
+    &:before {
+      top: 5px;
+      right: -7px;
+      border-width: 8px 0px 8px 8px;
+      border-color: transparent $error-msg-bg transparent;
+    }
+  }
+  &.right {
+    top: 0;
+    left: calc(100% + 7px);
+    &:before {
+      top: 5px;
+      left: -7px;
+      border-width: 8px 8px 8px 0px;
+      border-color: transparent $error-msg-bg transparent;
+    }
+  }
+}
+
+
+label{
+    font-size: 0.8em;
+}
+.fn-input, .form-control{
+    &::placeholder{
+        color: #999999;
+    }
+    &input{
+        @include border(1px, solid, rgb(221, 223, 224));
+        @include shadow-reset;
+        background-color: #ffffff;
+        color: #555;
+        outline: none;
+        height: 34px;
+        @include padding(6px 12px 6px 12px);
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-image: none;
+        @include transition(all .2s linear);
+        @include border-radius(4px);
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+    }
+    &.input-rounded{
+        @include border-radius(25px);
+    }
+}
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+fn-button {
+  display: inline-block;
+
+  .fn-button {
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+
+    .iconAddonBefore {
+      box-sizing: border-box;
+      padding: 0 5px 0 0 !important;
+      pointer-events: none;
+    }
+
+    .iconAddonAfter {
+      box-sizing: border-box;
+      padding: 0 0 0 5px !important;
+      pointer-events: none;
+    }
+
+    .button-content {
+      display: flex;
+      padding: 0;
+      align-items: center;
+      margin: auto;
+      place-content: center;
+
+      .label {
+        padding: 0;
+      }
+    }
+  }
+}
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}
+
+.btn-action {
+  width: auto;
+  margin: 0 5px;
+  font-size: 14px;
+  padding: 0;
+  display: inline-block;
+}
+.btn-sm {
+  height: 34px;
+  @include padding(0.25rem 0.7rem);
+}
+@each $colorName, $colorCode in $colorMapLight {
+  .btn-#{$colorName} {
+    border: 2px solid $colorCode;
+    color: $white;
+    background-color: $colorCode;
+  }
+}
+@each $colorName, $colorCode in $colorMapDark {
+  .btn-#{$colorName} {
+    &:hover,
+    &:focus,
+    &:visited,
+    &:active,
+    &:not(:disabled):not(.disabled):active {
+      border: 2px solid $colorCode;
+      color: $white;
+      background-color: $colorCode;
+    }
+  }
+}
+.btn-round{
+  @include radius(30px);
+}
+.btn-square{
+  @include radius(0px);
+}
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+fn-color-picker {
+  input.fn-color-picker-border {
+    height: 19px;
+    width: 19px;
+    cursor: pointer;
+    border: none;
+  }
+
+  color-picker {
+    .color-picker {
+      @include shadow(5px, 5px, 10px, rgba(0, 0, 0, 0.1));
+      @include border-reset;
+      @include radius(5px);
+      z-index: 1;
+      @include padding(2px 2px 2px 2px);
+
+      .arrow {
+        &.arrow-right-top {
+          bottom: 4px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) $white rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &.arrow-right-bottom {
+          top: 4px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) $white rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &.arrow-left-top {
+          bottom: 4px;
+          right: -20px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $white;
+        }
+
+        &.arrow-left-bottom {
+          top: 4px;
+          right: -20px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $white;
+        }
+      }
+
+      .hue-alpha {
+        .left {
+          @include padding(0);
+
+          .selected-color {
+            top: 0;
+            left: 0;
+          }
+        }
+
+        .right {
+          @include padding(0 0 0 10px);
+        }
+      }
+
+      .button-area {
+        @include padding(0 9px 9px);
+        text-align: inherit;
+        float: left;
+        width: 100%;
+
+        button {
+          min-width: 80px;
+          @include padding(5px 10px);
+        }
+      }
+    }
+  }
+}
+
+
+/*
+  * Created By Vasim Hayat at 1/14/2020 1:40 PM
+  *
+  */
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+.single-date-picker {
+  width: 225px;
+  .invisible {
+    height: 0px;
+  }
+  .btn-group {
+    button.btn-outline-secondary {
+      border-color: $btn-outline-secondary;
+      @include padding(5px 10px);
+      letter-spacing: 0.04em;
+      color: $date-picker-btn-text-color;
+      line-height: 23px;
+      background-color: transparent;
+      height: 34px;
+      &:hover {
+        color: $black;
+        background-color: transparent;
+      }
+      i.fa {
+        font-size: 16px;
+        line-height: 23px;
+      }
+      img.svg {
+        height: 17px;
+        width: 17px;
+        @include margin-direction(top, -4px);
+        @include margin-direction(right, 4px);
+      }
+      &:first-child {
+        @include radius(30px 0 0 30px);
+      }
+      &:last-child {
+        @include radius(0 30px 30px 0);
+      }
+    }
+  }
+}
+
+::ng-deep .fn-date-month-picker {
+  .mat-calendar-period-button {
+    pointer-events: none;
+  }
+
+  .mat-calendar-arrow {
+    display: none;
+  }
+}
+
+mat-datepicker-content.mat-datepicker-content {
+  min-height: 330px;
+  height: 330px;
+  @include margin-direction(top, 5px);
+  mat-calendar.mat-calendar {
+    mat-calendar-header {
+      .mat-calendar-header {
+        .mat-calendar-controls {
+          @include margin(0% calc(33% / 7 - 16px) 2%);
+        }
+      }
+    }
+    .mat-calendar-content {
+      min-height: 326px;
+      height: 326px;
+      mat-month-view {
+        table.mat-calendar-table {
+          width: 100%;
+          .mat-calendar-table-header {
+            tr {
+              th.mat-calendar-table-header-divider {
+                visibility: inherit;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*
+  * Created By Vasim Hayat at 1/14/2020 1:40 PM
+  *
+  */
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+fn-button {
+  display: inline-block;
+
+  .fn-button {
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+
+    .iconAddonBefore {
+      box-sizing: border-box;
+      padding: 0 5px 0 0 !important;
+      pointer-events: none;
+    }
+
+    .iconAddonAfter {
+      box-sizing: border-box;
+      padding: 0 0 0 5px !important;
+      pointer-events: none;
+    }
+
+    .button-content {
+      display: flex;
+      padding: 0;
+      align-items: center;
+      margin: auto;
+      place-content: center;
+
+      .label {
+        padding: 0;
+      }
+    }
+  }
+}
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}
+
+.btn-action {
+  width: auto;
+  margin: 0 5px;
+  font-size: 14px;
+  padding: 0;
+  display: inline-block;
+}
+.btn-sm {
+  height: 34px;
+  @include padding(0.25rem 0.7rem);
+}
+@each $colorName, $colorCode in $colorMapLight {
+  .btn-#{$colorName} {
+    border: 2px solid $colorCode;
+    color: $white;
+    background-color: $colorCode;
+  }
+}
+@each $colorName, $colorCode in $colorMapDark {
+  .btn-#{$colorName} {
+    &:hover,
+    &:focus,
+    &:visited,
+    &:active,
+    &:not(:disabled):not(.disabled):active {
+      border: 2px solid $colorCode;
+      color: $white;
+      background-color: $colorCode;
+    }
+  }
+}
+.btn-round{
+  @include radius(30px);
+}
+.btn-square{
+  @include radius(0px);
+}
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}
+
+mat-dialog-container.mat-dialog-container {
+  @include padding(0);
+  @include radius(5px);
+  min-width: 300px;
+
+  ng-component {
+    float: left;
+    width: 100%;
+    overflow-x: hidden;
+
+    mat-dialog-content {
+      @include margin(0);
+      @include padding(15px 15px 15px 15px);
+      min-height: 50px;
+    }
+
+    mat-dialog-actions {
+      @include margin-direction(bottom, 0);
+      min-height: auto !important;
+      @include padding(12px 15px 12px 15px);
+      float: left;
+      width: 100%;
+      display: block;
+      @include border-direction(top, 1px, solid, $border-default-color);
+
+      button {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: 80px;
+      }
+    }
+  }
+}
+:root {
+  --modal-header-bg: $modal-header-bg;
+  --modal-header-title-color: $modal-header-title-color;
+  --modal-header-close-border: $modal-header-close-border;
+}
+
+fn-modal-header {
+  display: flex;
+  @include padding(12px 15px 12px 15px);
+  background-color: var(--modal-header-bg);
+  position: relative;
+  .modal-title {
+    font-size: 15px;
+    color: $gray;
+    margin: 0;
+  }
+  button.close {
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 13px;
+    border-radius: 10px;
+    border: 1px solid var(--modal-header-close-border);
+    height: 20px;
+    width: 20px;
+    outline: none;
+    font-size: 15px !important;
+    text-align: center;
+    line-height: 17px !important;
+    @include padding-direction(bottom, 0px);
+    text-shadow: none;
+  }
+  @each $colorName, $colorCode in $colorMapDark {
+    &.modal-header-#{$colorName} {
+      color: $white;
+      background-color: $colorCode;
+      .modal-title {
+        color: $white;
+      }
+      button.close {
+        border-color: $white;
+        color: $white;
+      }
+    }
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+:root {
+  --modal-header-bg: $modal-header-bg;
+  --modal-header-title-color: $modal-header-title-color;
+  --modal-header-close-border: $modal-header-close-border;
+}
+
+fn-modal-header {
+  display: flex;
+  @include padding(12px 15px 12px 15px);
+  background-color: var(--modal-header-bg);
+  position: relative;
+
+  .modal-title {
+    font-size: 15px;
+    color: #494949;
+    margin: 0;
+  }
+
+  button.close {
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 13px;
+    border-radius: 10px;
+    border: 1px solid var(--modal-header-close-border);
+    height: 20px;
+    width: 20px;
+    outline: none;
+    font-size: 15px !important;
+    text-align: center;
+    line-height: 16px !important;
+
+    span {
+      vertical-align: text-top;
+    }
+  }
+
+  &.modal-header-success {
+    color: #fff;
+    background-color: $green;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+  &.modal-header-warning {
+    color: #fff;
+    background-color: $orange;
+  }
+
+  &.modal-header-danger {
+    color: #fff;
+    background-color: $red;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+  &.modal-header-info {
+    color: #fff;
+    background-color: $cyan;
+  }
+
+  &.modal-header-primary {
+    color: #fff;
+    background-color: $blue;
+
+    .modal-title {
+      color: $white;
+    }
+
+    button.close {
+      border-color: $white;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+
+}
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+:root {
+  --time-list-hover-bg: $time-list-hover-bg;
+}
+
+.fn-time-picker-search {
+  width: 100%;
+  float: left;
+  position: relative;
+  input {
+    width: 100%;
+    float: left;
+    background-color: $white;
+    background-clip: padding-box;
+    border: 1px solid $border-default-color;
+    border-radius: 0.25rem;
+  }
+  .fn-time-picker-ul {
+    list-style: none;
+    border: 1px solid $border-default-color;
+    width: 100%;
+    max-height: 160px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+
+    li {
+      border-bottom: 1px solid $border-default-color;
+      cursor: pointer;
+      padding: 4px 12px;
+      background-color: $white;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      font-weight: normal;
+      @include transition(all 0.3s ease-in);
+      &:last-child {
+        border-bottom: none;
+      }
+      &:hover {
+        background-color: var(--time-list-hover-bg);
+        color: $white;
+      }
+    }
+  }
+}
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+
+:root {
+  --time-list-hover-bg: $time-list-hover-bg;
+}
+
+.fn-time-picker-search {
+  width: 100%;
+  float: left;
+  position: relative;
+
+  input {
+    width: 100%;
+    float: left;
+    background-color: $white;
+    background-clip: padding-box;
+    border: 1px solid $border-default-color;
+    border-radius: 0.25rem;
+    &:focus {
+      border: 1px solid $input-focus-border-color;
+    }
+  }
+
+  .fn-time-picker-ul {
+    list-style: none;
+    border: 1px solid $border-default-color;
+    width: 100%;
+    max-height: 160px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 1px;
+    margin: 0;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    @include linear-gradient(bottom, $modal-header-bg 0%, $time-list-gradient-bg 100%);
+    li {
+      cursor: pointer;
+      padding: 4px 12px;
+      background-color: transparent;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      font-weight: normal;
+      @include transition(all 0.3s ease-in);
+      @include radius(4px);
+      @include border-reset;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: var(--time-list-hover-bg);
+        color: $white;
+      }
+    }
+  }
+}
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+@mixin center-login {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin shadow-inset($style, $x, $y, $blur, $color) {
+  -webkit-box-shadow: $style $x $y $blur $color;
+  -moz-box-shadow: $style $x $y $blur $color;
+  box-shadow: $style $x $y $blur $color;
+}
+@mixin shadow($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+@mixin shadow-reset {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+@mixin border($width, $style, $color) {
+  border: $width $style $color;
+}
+@mixin border-direction($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+@mixin border-direction-reset($direction) {
+  border-#{$direction}: none;
+}
+@mixin border-reset {
+  border: none !important;
+}
+@mixin animate($property: all, $duration: 1s, $easing: ease) {
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+  -o-transition: $property $duration $easing;
+  transition: $property $duration $easing;
+}
+
+@mixin margin($value) {
+  margin: $value;
+}
+@mixin margin-direction($direction, $value) {
+  margin-#{$direction}: $value;
+}
+@mixin margin-reset {
+  margin: 0 !important;
+}
+@mixin padding($value) {
+  padding: $value;
+}
+@mixin padding-direction($direction, $value) {
+  padding-#{$direction}: $value !important;
+}
+@mixin padding-reset {
+  padding: 0 !important;
+}
+@mixin notice-box($color, $plain: false) {
+  $background-color: lighten($color, 30%);
+  $text-color: darken($color, 20%);
+  $border-color: lighten($color, 30%);
+  @include radius(5px);
+  $fontweight: 400;
+  @if $plain == true {
+    $background-color: $color;
+    $text-color: $white;
+    $border-color: lighten($color, 30%);
+    $outline: lighten($color, 30%);
+    $fontweight: 200;
+  }
+  font-weight: $fontweight;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  p {
+    color: $text-color;
+    text-shadow: none;
+  }
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if $side == top {
+    @return bottom;
+  } @else if $side == bottom {
+    @return top;
+  } @else if $side == left {
+    @return right;
+  } @else if $side == right {
+    @return left;
+  }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image: -moz-linear-gradient($gradientLine, $colorStops);
+  background-image: -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+    background-image: linear-gradient(
+      to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))},
+      $colorStops
+    );
+  } @else {
+    background-image: linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image: -moz-radial-gradient($gradient);
+  background-image: -o-radial-gradient($gradient);
+  background-image: radial-gradient($gradient);
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+  -moz-transition-property: $properties;
+  -o-transition-property: $properties;
+  transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}
+@mixin radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin outline-reset {
+  outline: none;
+}
+@mixin outline($style, $color, $width) {
+  outline-style: $style;
+  outline-color: $color;
+  outline-width: $width;
+}
+
+.fn-pagging-btn {
+  border: 1px solid $border-default-color;
+  padding: 3px 10px !important;
+  font-size: 12px;
+}
+
+
+.filter_btn {
+  background-color: #fff;
+  color: #777;
+  border: 1px solid #777;
+  border-radius: 30px;
+  width: 250px;
+  margin-top: 10px;
+  padding: 4px 10px;
+  text-align: left;
+}
+
+.filter_btn:focus,
+.filter_btn:active,
+.filter_btn:hover {
+  box-shadow: none;
+}
+
+.filter_btn i {
+  margin-left: 10px;
+  float: right;
+  top: 18px;
+  position: absolute;
+  right: 8px;
+}
+
+.filter_btn:after {
+  display: none;
+}
+
+.filter_data {
+  width: 250px;
+  background-color: #fff;
+  padding: 10px;
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+  max-height: 230px;
+  overflow-x: hidden;
+}
+
+.filter_data input {
+  padding-right: 40px;
+}
+
+.filter_data input:focus {
+  box-shadow: none;
+}
+
+.filter_data .search_icon {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  cursor: pointer;
+}
+
+.filter_data li {
+  color: #424242;
+  font-size: 14px;
+  border-radius: 4px;
+  float: left;
+  width: 100%;
+}
+
+.filter_data li a {
+  text-decoration: none;
+}
+
+.filter_data li div {
+  padding: 5px 6px;
+}
+
+.filter_data li>div:hover {
+  background-color: #f8f9f9;
+  color: #787a7b;
+}
+
+.filter_data li i {
+  font-size: 14px;
+}
+
+.filter_data li span {
+  margin-right: 5px;
+  width: auto;
+  display: inline-block;
+}
+
+.filter_data li:first-child {
+  cursor: default;
+  background-color: transparent;
+  padding: 0 0 5px 0;
+}
+
+.filter_data li:nth-child(2) {
+  cursor: default;
+}
+
+.filter_data li .sub_role {
+  color: #a9a9a9;
+  font-size: 13px;
+  padding: 0;
+  float: left;
+  width: 100%;
+}
+
+.filter_data li .sub_role:hover {
+  background-color: transparent;
+}
+
+.filter_data li .sub_role .sub_role_data {
+  cursor: pointer;
+  float: left;
+  width: 100%;
+  margin-bottom: 1px;
+  padding: 5px 6px 5px 22px;
+}
+
+.filter_data li .sub_role .sub_role_data:hover {
+  background-color: #f8f9f9;
+  color: #787a7b;
+}
+
+
+/*
+  * Created By Vasim Hayat at 1/14/2020 1:40 PM
+  *
+  */
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+
+
+:root {
+  --side-nav-bg: $side-nav-bg;
+  --nav-link-text: $nav-link-text;
+  --nav-link-text-hover: $nav-link-text-hover;
+  --active-nav-link-border: $active-nav-link-border;
+  --active-nav-link-hover-bg: $active-nav-link-hover-bg;
+  --nav-link-border: $nav-link-border;
+  --nav-link-bg: $nav-link-bg;
+  --nav-link-hover-color: $nav-link-hover-color;
+  --nav-link-bg-color: $nav-link-bg-color;
+}
+
+.bg-dark {
+  background-color: $bg-dark !important;
+}
+
+#navAccordion {
+  background: var(--side-nav-bg);
+
+  .nav-link-collapse {
+    &:after {
+      float: right;
+      content: "\f078";
+      font-family: "FontAwesome";
+      font-size: 0.9em;
+    }
+  }
+
+  .nav-link-show {
+    &:after {
+      float: right;
+      content: "\f077";
+      font-family: "FontAwesome";
+      font-size: 0.9em;
+    }
+  }
+
+  .nav-item {
+    cursor: pointer;
+    width: 300px;
+
+    .nav-link {
+      border-left: 2px solid transparent;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      padding: 0.7rem 0.8rem;
+      @include text-truncate();
+      max-width: 300px;
+      color: var(--nav-link-text);
+      opacity: 0.7;
+      font-weight: 300;
+
+      &:hover {
+        color: var(--nav-link-text-hover);
+        background-color: var(--active-nav-link-hover-bg);
+        transition: all 0.4s;
+        opacity: 1;
+      }
+
+      img {
+        height: 21px;
+        width: 21px;
+        margin-right: 15px;
+        margin-top: -3px;
+      }
+
+      i {
+        line-height: 20px;
+      }
+    }
+
+    &.active> {
+      .nav-link {
+        border-left: 2px solid var(--active-nav-link-border);
+        background-color: var(--active-nav-link-hover-bg);
+        opacity: 1;
+      }
+
+      .nav-sub {
+        display: block;
+      }
+    }
+
+    > {
+      .nav-sub {
+        margin: 0;
+        padding: 0 !important;
+        display: none;
+
+        > {
+          .nav-item {
+            .nav-link {
+              padding-left: 48px;
+            }
+          }
+        }
+      }
+    }
+
+    &.nav-dropdown {
+      a {
+        i {
+          line-height: 23px;
+        }
+      }
+    }
+  }
+}
+
+.nav-item ul.nav-second-level>.nav-item {
+  padding-left: 0px;
+}
+
+.nav-item ul.nav-second-level>.nav-item>.nav-link {
+  padding-left: 20px;
+}
+
+.nav-item ul.nav-second-level {
+  padding-left: 0;
+}
+
+.fixed-top {
+  z-index: 2 !important;
+}
+
+@media (min-width: 720px) {
+  #navAccordion.sidenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: calc(100vh - 50px);
+    margin-top: 50px;
+    background: var(--side-nav-bg);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    transition: width 0.5s ease-in;
+    z-index: 2;
+  }
+
+  .navbar-expand-lg #navAccordion.sidenav {
+    flex-direction: column;
+  }
+}
+
+#navAccordion.sidenav:hover {
+  width: 300px;
+}
+
+
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);
+
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}
+
+
+@each $colorName, $colorCode in $colorMapLight {
+  .fa-#{$colorName} {
+    color: $colorCode;
+  }
+}
+

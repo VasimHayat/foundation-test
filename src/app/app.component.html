@@ -1,35 +1,4 @@
-<div class="container">
-  <div class="well">
-    <div style="padding-top:100px;text-align: center;">
-      <label>
-        Date :
-      </label>
-      <fn-date-picker [selectedDate]="dateObject.startDate" (callback)="changeDate($event)"
-        (dateDisabled)="disabledDate($event)" (nextDisabledCallback)="nextDisable($event)"
-        (nextPrevCallback)="nextPrevDate($event)" (prevDisabledCallback)="prevDisable($event)">
-      </fn-date-picker>
-    </div>
+ 
 
-  </div>
-
-  <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
-
-    <div class="col">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <fn-input [(ngModel)]="user.email" [dataKey]="'email'" required [parentForm]="loginForm" name="Email">
-        </fn-input>
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <label>Password</label>
-        <fn-input [(ngModel)]="user.password" [dataKey]="'password'" required [parentForm]="loginForm" name="password">
-        </fn-input>
-      </div>
-    </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
-  </form>
-
-
-</div>
+     <router-outlet></router-outlet>
+  

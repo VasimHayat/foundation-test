@@ -10,7 +10,8 @@ declare module 'foundation-config' {
             clone(): Date;
             isAnotherMonth(date: Date): boolean;
             isWeekend(): boolean;
-            isSameDate(date: Date): boolean;
+
+          isSameDate(date: Date): boolean;
             getCurrentDate(): any;
             offsetMntsToBusiDate(minutes: any): any;
             timeForZoneOffset(offset: any): any;

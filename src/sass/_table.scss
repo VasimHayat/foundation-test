@@ -1,0 +1,65 @@
+@import '../sass/mixins';
+table.table{
+    background-color: $white;
+    color: #646464;
+    .table-shadow{
+        @include shadow(3px, 5px, 10px, rgba(0,0,0,0.05));
+    }
+    thead{
+        &.grey.lighten-2{
+            background-color: #e8eaeb !important;
+        }
+        &.black.white-text {
+            background-color: #000 !important;
+            tr{
+                th{
+                    color: #fff !important;
+                }
+            }
+        }
+        tr {
+            th{
+                font-size: 0.9em;
+                @include padding(8px 10px 8px 10px);
+                border: 0 !important;
+            }
+        }
+    }
+    tbody{
+        tr{
+            td{
+                font-size: 0.9em;
+                font-weight: normal; 
+                padding: 8px 10px !important;
+            }
+            th{
+                font-size: 0.7em;
+                padding: 8px 10px !important;
+            }
+        }
+    }
+    &.table-bordered{
+        th, td{
+           border: 1px solid #eceeef;
+        }
+    }
+    th, td{
+        border-top: 1px solid #eceeef;
+    }
+    &.table-striped {
+        tbody {
+            tr:nth-of-type(odd){
+                background-color: #fafbfc;
+            }
+        }
+    }
+    &.table-hover{
+        tbody{
+        tr:hover{
+            background-color: rgba(0,0,0,0.075) !important;
+            -webkit-transition: .5s;
+            transition: .5s;
+        }    
+      }
+    }
+}

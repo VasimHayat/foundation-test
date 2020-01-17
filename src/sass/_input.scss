@@ -1,0 +1,31 @@
+/* Input SACSS Start */
+
+label{
+    font-size: 0.8em;
+}
+.fn-input, .form-control{
+    height: 34px;
+    &::placeholder{
+        color: #999999;
+    }
+    &input{
+        @include border(1px, solid, rgb(221, 223, 224));
+        @include shadow-reset;
+        background-color: #ffffff;
+        color: #555;
+        outline: none;
+        height: 34px;
+        @include padding(6px 12px 6px 12px);
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-image: none;
+        @include transition(all .2s linear);
+        @include border-radius(4px);
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+    }
+    &.input-rounded{
+        @include border-radius(25px);
+    }
+}

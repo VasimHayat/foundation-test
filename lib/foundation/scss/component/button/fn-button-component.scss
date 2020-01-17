@@ -1,0 +1,38 @@
+
+@import "../../theme/variable";
+@import "../../theme/mixins";
+
+fn-button {
+  display: inline-block;
+
+  .fn-button {
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+
+    .iconAddonBefore {
+      box-sizing: border-box;
+      padding: 0 5px 0 0 !important;
+      pointer-events: none;
+    }
+
+    .iconAddonAfter {
+      box-sizing: border-box;
+      padding: 0 0 0 5px !important;
+      pointer-events: none;
+    }
+
+    .button-content {
+      display: flex;
+      padding: 0;
+      align-items: center;
+      margin: auto;
+      place-content: center;
+
+      .label {
+        padding: 0;
+      }
+    }
+  }
+}

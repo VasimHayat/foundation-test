@@ -24,6 +24,6 @@ export declare class FnMultiTimePickerComponent implements OnInit {
     filterValue(event: KeyboardEvent): void;
     onItemClick(param: string): void;
     closeDropDown(): void;
-    openDropDown(event: KeyboardEvent): void;
+    openDropDown(event: any): void;
     keyDownChange(event: KeyboardEvent): void;
 }

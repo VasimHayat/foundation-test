@@ -1,0 +1,50 @@
+@import "_variable.scss";
+$colorMapLight: (
+  "success": $green,
+  "progress": $orange,
+  "warning": $yellow,
+  "light": $white,
+  "danger": $red,
+  "alert": $alert,
+  "primary": $blue,
+  "info": $cyan,
+  "secondary": $secondary
+);
+$colorMapDark: (
+  "success": $successDark,
+  "progress": $progressDark,
+  "warning": $warningDark,
+  "light": $lightDark,
+  "danger": $dangerDark,
+  "alert": $alertDark,
+  "primary": $primaryDark,
+  "info": $infoDark,
+  "secondary": $secondaryDark
+);
+$colorMap: (
+  "green": $green,
+  "black": $black,
+  "orange": $orange,
+  "blue": $blue,
+  "red": $red,
+  "cyan": $cyan,
+  "yellow": $yellow,
+  "white": $white,
+  "gray": $gray,
+  "light-gray": $light-gray
+);
+
+@each $colorName, $colorCode in $colorMap {
+  .progress-bar-#{$colorName}:before {
+    background: $colorCode;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorCode;
+  }
+  .f-#{$colorName} {
+    color: $colorCode;
+  }
+  .#{$colorName} {
+    color: $colorCode;
+  }
+}

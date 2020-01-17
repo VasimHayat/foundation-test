@@ -1,0 +1,71 @@
+$primary-color: #333;
+$primary-bg-color: #eff3f6;
+$radius: 0.05em;
+$border-default-color: #ced4da;
+$disabled: rgba(0, 0, 0, 0.25);
+$switch-button: #ccc;
+$input-focus-border-color: #80bdff !default;
+$error-msg-bg: #e74c3c;
+$input-disable-color: rgba(0, 0, 0, 0.25);
+$input-disable-bg: #f5f5f5;
+$input-placeholder-color: #999;
+$input-text-color: #555;
+$switch-gradient: #ececec;
+$progress-bar-bg: #dee2e3;
+// color variables
+$green: #61c390;
+$orange: #ed6f00;
+$yellow: #ffc300;
+$white: #ffffff;
+$red: #fd5969;
+$blue: #3bbbef;
+$cyan: #4acaff;
+$gray: #8a8f9f;
+$light-gray: #b6b6b6;
+$black: #000000;
+$bg-dark: #484d55;
+$alert: #e7394a;
+$secondary: #8a8f9f;
+$successDark: #40b377;
+$progressDark: #da6b0a;
+$warningDark: #ebb60a;
+$lightDark: #ffffff;
+$dangerDark: #e7394a;
+$alertDark: #e7394a;
+$primaryDark: #21a7de;
+$infoDark: #4acaff;
+$secondaryDark: #6a6e7b;
+/* Side bar navigation theme */
+$side-nav-bg: #484d55;
+$nav-link-text: #f8f8f8;
+$nav-link-text-hover: #f8f8f8;
+$active-nav-link-border: #35c4ff;
+$active-nav-link-hover-bg: #465766;
+$nav-link-border: transparent;
+$nav-link-bg: transparent;
+$nav-link-hover-color: #f8f8f8;
+$nav-link-bg-color: #596773;
+/* Side bar navigation  theming End*/
+/* Time Picker Theming Start */
+$time-list-hover-bg: #484d55;
+$time-list-gradient-bg: #eceeef;
+/* Time Picker Theming End */
+/* Select list Theming Start */
+$list-item-hover-bg: #007bff;
+/* Select List Theming End*/
+/* Modal Theming Start*/
+$modal-header-bg: #f2f2f2;
+$modal-header-title-color: #333;
+$modal-header-close-border: #858585;
+/* Modal Theming End*/
+$btn-outline-secondary: #dddfe0;
+$date-picker-btn-text-color: #6c757d;
+/* Calendar Theming start */
+$calendar-header-bg: #484d55;
+/* Table theming */
+$table-text-color: #646464;
+$table-shadow: rgba(0, 0, 0, 0.05);
+$gray-head-bg: #e8eaeb !important;
+$table-border-color: #eceeef;
+$table-stripped-bg: #fafbfc;
+$table-hover-bg: rgba(0, 0, 0, 0.075);

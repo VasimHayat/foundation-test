@@ -1,0 +1,151 @@
+@import "../../../theme/variable";
+@import "~bootstrap/scss/mixins/text-truncate";
+
+:root {
+  --side-nav-bg: $side-nav-bg;
+  --nav-link-text: $nav-link-text;
+  --nav-link-text-hover: $nav-link-text-hover;
+  --active-nav-link-border: $active-nav-link-border;
+  --active-nav-link-hover-bg: $active-nav-link-hover-bg;
+  --nav-link-border: $nav-link-border;
+  --nav-link-bg: $nav-link-bg;
+  --nav-link-hover-color: $nav-link-hover-color;
+  --nav-link-bg-color: $nav-link-bg-color;
+}
+
+.bg-dark {
+  background-color: $bg-dark !important;
+}
+
+#navAccordion {
+  background: var(--side-nav-bg);
+
+  .nav-link-collapse {
+    &:after {
+      float: right;
+      content: "\f078";
+      font-family: "FontAwesome";
+      font-size: 0.9em;
+    }
+  }
+
+  .nav-link-show {
+    &:after {
+      float: right;
+      content: "\f077";
+      font-family: "FontAwesome";
+      font-size: 0.9em;
+    }
+  }
+
+  .nav-item {
+    cursor: pointer;
+    width: 300px;
+
+    .nav-link {
+      border-left: 2px solid transparent;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      padding: 0.7rem 0.8rem;
+      @include text-truncate();
+      max-width: 300px;
+      color: var(--nav-link-text);
+      opacity: 0.7;
+      font-weight: 300;
+
+      &:hover {
+        color: var(--nav-link-text-hover);
+        background-color: var(--active-nav-link-hover-bg);
+        transition: all 0.4s;
+        opacity: 1;
+      }
+
+      img {
+        height: 21px;
+        width: 21px;
+        margin-right: 15px;
+        margin-top: -3px;
+      }
+
+      i {
+        line-height: 20px;
+      }
+    }
+
+    &.active> {
+      .nav-link {
+        border-left: 2px solid var(--active-nav-link-border);
+        background-color: var(--active-nav-link-hover-bg);
+        opacity: 1;
+      }
+
+      .nav-sub {
+        display: block;
+      }
+    }
+
+    > {
+      .nav-sub {
+        margin: 0;
+        padding: 0 !important;
+        display: none;
+
+        > {
+          .nav-item {
+            .nav-link {
+              padding-left: 48px;
+            }
+          }
+        }
+      }
+    }
+
+    &.nav-dropdown {
+      a {
+        i {
+          line-height: 23px;
+        }
+      }
+    }
+  }
+}
+
+.nav-item ul.nav-second-level>.nav-item {
+  padding-left: 0px;
+}
+
+.nav-item ul.nav-second-level>.nav-item>.nav-link {
+  padding-left: 20px;
+}
+
+.nav-item ul.nav-second-level {
+  padding-left: 0;
+}
+
+.fixed-top {
+  z-index: 2 !important;
+}
+
+@media (min-width: 720px) {
+  #navAccordion.sidenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: calc(100vh - 50px);
+    margin-top: 50px;
+    background: var(--side-nav-bg);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    transition: width 0.5s ease-in;
+    z-index: 2;
+  }
+
+  .navbar-expand-lg #navAccordion.sidenav {
+    flex-direction: column;
+  }
+}
+
+#navAccordion.sidenav:hover {
+  width: 300px;
+}

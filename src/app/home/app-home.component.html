@@ -1,0 +1,28 @@
+<modal-header>
+  <h5 class="modal-title">
+    Switch Toggle
+  </h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+    &times;
+  </button>
+</modal-header>
+<mat-dialog-content>
+<div class="row m-0">
+  <h1 class="text-success col-md-12 text-center">Switch toggle</h1>
+  <div class="col">
+    <fn-switch [(ngModel)]="user.isActive" name="isActive" [checkedTemplate]="checkedTemplate"
+      [unCheckedTemplate]="unCheckedTemplate"></fn-switch>
+    <ng-template #checkedTemplate>
+      <i class="fa fa-pencil"></i> Good
+    </ng-template>
+    <ng-template #unCheckedTemplate>
+      <i class="fa fa-pencil"></i> Bad
+    </ng-template>
+  </div>
+
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn btn-danger float-left btn-round" (click)="close()">Cancel</button>
+  <button class="btn btn-primary float-right btn-round" (click)="close(true)" cdkFocusInitial>Okey</button>
+</mat-dialog-actions>

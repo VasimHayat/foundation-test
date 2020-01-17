@@ -1,0 +1,46 @@
+@import "_variable.scss";
+
+$colorMap: (
+    "green":#1BBC9B,
+    "black": #000000,
+    "orange":#F0AD4E,
+    "blue":#578EBE,
+    "red":#fd5969,
+    "cyan":#35c4ff,
+    "yellow": #fee188
+    );
+@each $colorName, $colorCode in $colorMap {
+.btn-#{$colorName}{
+border:2px solid $colorCode; 
+color: $white;   
+background-color: $colorCode;
+&:hover{
+ opacity:0.8; 
+}
+&:focus{
+    box-shadow:none;
+}
+}
+.progress-bar-#{$colorName}:before{
+background:$colorCode;
+}
+.bg-#{$colorName}{
+background-color: $colorCode;
+}
+.f-#{$colorName}{
+color: $colorCode;
+}
+
+}
+
+/* Text color */
+.green{color: $green; }
+.orange{color: $orange;}
+.yellow{color: $yellow;}
+.white{color: $white;}
+.red{color: $red;}
+.blue{color: $blue;}
+.cyan{color: $cyan;}
+.gray{color: $gray;}
+.light-gray{color: $light-gray;}
+.black{color: $black;}

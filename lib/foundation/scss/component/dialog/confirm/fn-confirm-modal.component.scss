@@ -1,0 +1,83 @@
+@import "../../../theme/variable";
+@import "../../../theme/mixins";
+@import "../../../theme/button";
+@import "../../../theme/color";
+mat-dialog-container.mat-dialog-container {
+  @include padding(0);
+  @include radius(5px);
+  min-width: 300px;
+
+  ng-component {
+    float: left;
+    width: 100%;
+    overflow-x: hidden;
+
+    mat-dialog-content {
+      @include margin(0);
+      @include padding(15px 15px 15px 15px);
+      min-height: 50px;
+    }
+
+    mat-dialog-actions {
+      @include margin-direction(bottom, 0);
+      min-height: auto !important;
+      @include padding(12px 15px 12px 15px);
+      float: left;
+      width: 100%;
+      display: block;
+      @include border-direction(top, 1px, solid, $border-default-color);
+
+      button {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: 80px;
+      }
+    }
+  }
+}
+:root {
+  --modal-header-bg: $modal-header-bg;
+  --modal-header-title-color: $modal-header-title-color;
+  --modal-header-close-border: $modal-header-close-border;
+}
+
+fn-modal-header {
+  display: flex;
+  @include padding(12px 15px 12px 15px);
+  background-color: var(--modal-header-bg);
+  position: relative;
+  .modal-title {
+    font-size: 15px;
+    color: $gray;
+    margin: 0;
+  }
+  button.close {
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 13px;
+    border-radius: 10px;
+    border: 1px solid var(--modal-header-close-border);
+    height: 20px;
+    width: 20px;
+    outline: none;
+    font-size: 15px !important;
+    text-align: center;
+    line-height: 17px !important;
+    @include padding-direction(bottom, 0px);
+    text-shadow: none;
+  }
+  @each $colorName, $colorCode in $colorMapDark {
+    &.modal-header-#{$colorName} {
+      color: $white;
+      background-color: $colorCode;
+      .modal-title {
+        color: $white;
+      }
+      button.close {
+        border-color: $white;
+        color: $white;
+      }
+    }
+  }
+}

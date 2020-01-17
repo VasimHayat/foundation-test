@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FnUiFieldMetaDataService } from 'lib/foundation';
+import { FnApplication, FnExceptionService, FnModalService, FnThemeService } from 'foundation';
+import { HwApplication } from './hw.application';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,104 +9,23 @@ import { FnUiFieldMetaDataService } from 'lib/foundation';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  user = {
-    isActive: true,
-    email: 'jack@martin.com',
-    password: ''
-  };
-
-  constructor(private metaDataSvcs: FnUiFieldMetaDataService) {
-    this.loadFiledMetaData();
+  constructor(private hwApp: HwApplication, private fnLog: FnExceptionService, private dialogSvcs: FnModalService, private themeService: FnThemeService, private http: HttpClient) {
+    console.log(this.fnLog.logException("Error"))
   }
+  title = 'foundation-test';
 
-
-
-  loadFiledMetaData() {
-    this.metaDataSvcs.setFieldMap(
-      {
-        email: {
-
-          isRequired: true,
-          isEnableOnUI: true,
-          labelIDArray: [
-            'Entity_EOEmpMain_Field_jobCodeDescription_LBL',
-            'Entity_EOEmpMain_Field_jobCodeDescription_HVR'
-          ],
-          minLength: 5,
-          isInitialized: true,
-          isShowInfo: false,
-          labelPosition: 'left',
-          recalAccess: false,
-          typeID: {
-            iid: 'EMAIL',
-            isNumber: false,
-            defaultTableWidth: 50,
-            defaultEditWidth: 20
-          },
-          applicablePK: 0,
-          id: 'Entity_EOEmpMain_Field_jobCodeDescription',
-          isDisabled: false,
-          key: 'email',
-          maxLength: 255,
-          isDynDetailKey: false,
-          hideLabel: false
-        },
-        password: {
-
-          isRequired: true,
-          isEnableOnUI: true,
-          labelIDArray: [
-            'Entity_EOEmpMain_Field_jobCodeDescription_LBL',
-            'Entity_EOEmpMain_Field_jobCodeDescription_HVR'
-          ],
-          minLength: 8,
-          isInitialized: true,
-          isShowInfo: false,
-          labelPosition: 'left',
-          recalAccess: false,
-          typeID: {
-            iid: 'PASSWORD',
-            isNumber: false,
-            defaultTableWidth: 50,
-            defaultEditWidth: 20
-          },
-          applicablePK: 0,
-          id: 'Entity_EOEmpMain_Field_PASSWORD',
-          isDisabled: false,
-          key: 'password',
-          maxLength: 255,
-          isDynDetailKey: false,
-          hideLabel: false
-        }
-      },
-    );
+  openCngMdl() {
+    //this.dialogSvcs.openModal(AppHomeComponent, { data: { id: 'name' }, hasBackdrop: true });
+    this.dialogSvcs.openConfirmModal();
   }
-
-  onSubmit(_form) {
+  ngOnInit(){
+    this.useTheme('theme1');
 
   }
-
-  dateObject = {
-    startDate: new Date("2019-12-10"),
-    endDate: new Date("2019-12-17")
-  }
-  maxDate = new Date("2024-11-30");
-  changeDate(event) {
-  }
-  disabledDate(obj) {
-    //   obj.callback(obj.date < new Date("2019-12-20") && obj.date > new Date("2019-11-10") )  ;
-  }
-  nextDisable(dateObj: any) {
-    let currentDate = dateObj.date;
-    dateObj.callback(new Date(currentDate.setDate(currentDate.getDate() + 1)) > new Date("2019-12-19"));
-  }
-  prevDisable(dateObj: any) {
-    let currentDate = dateObj.date;
-    //obj.callback(new Date(currentDate.setDate(currentDate.getDate() -1)) < new Date("2019-11-10"));
-  }
-  nextPrevDate(dateObj: any) {
-    console.log(dateObj)
-  }
-
+   public useTheme(themeID: string) {
+        this.http.get(`assets/theme/${themeID}.json`).subscribe((res) => {
+            this.themeService.setTheme(res);
+            console.log(res);
+        });
+    }
 }

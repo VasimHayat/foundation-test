@@ -1,6 +1,6 @@
 import { Validator, AbstractControl } from '@angular/forms';
 import { FnInputModel } from '../model/fn-input.model';
-import { FnI18nService } from '../i18n/fn-i18.service';
+import { FnI18nService } from '../../i18n/fn-i18.service';
 export declare class FnInputValidator implements Validator {
     private i18nSvcs;
     fieldConfig: FnInputModel;

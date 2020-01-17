@@ -1,0 +1,319 @@
+<form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <fn-date-picker [selectedDate]="dateObject.startDate" (callback)="changeDate($event)"
+          (dateDisabled)="disabledDate($event)" (nextDisabledCallback)="nextDisable($event)"
+          (nextPrevCallback)="nextPrevDate($event)" (prevDisabledCallback)="prevDisable($event)">
+        </fn-date-picker>
+      </div>
+      <div class="col">
+        <div class="col">
+          <fn-switch [(ngModel)]="user.isActive" name="isActive" [checkedTemplate]="checkedTemplate"
+            [unCheckedTemplate]="unCheckedTemplate"></fn-switch>
+          <ng-template #checkedTemplate>
+            <i class="fa fa-pencil"></i> Good
+          </ng-template>
+          <ng-template #unCheckedTemplate>
+            <i class="fa fa-pencil"></i> Bad
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <h2>Animated Radio Button Switch</h2>
+        <div class="switch switch-primary">
+          <input type="radio" class="switch-input" name="view" value="week" id="week" checked>
+          <label for="week" class="switch-label switch-label-off">Week</label>
+          <input type="radio" class="switch-input" name="view" value="month" id="month">
+          <label for="month" class="switch-label switch-label-on">Month</label>
+          <span class="switch-selection"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+      <div class="col-12">
+        <h2>Input</h2>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label>Email address</label>
+          <fn-input [(ngModel)]="user.email" [fnInputValidator] [fieldConfig]="metaData.email" [dataKey]="'email'"
+            [parentForm]="loginForm" name="Email">
+          </fn-input>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label>Password</label>
+          <fn-input [(ngModel)]="user.password" [dataKey]="'password'" required [parentForm]="loginForm"
+            name="password">
+          </fn-input>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label>Time</label>
+          <fn-time-picker></fn-time-picker>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label>Choose Your Fav Color ........................ {{favColor}}</label>
+          <fn-color-picker [(ngModel)]="favColor" name="color"></fn-color-picker>
+        </div>
+      </div>
+
+      <div class="col">
+        <fn-button width="''" [type]="'success btn-sm btn-round'" [text]="'Submit'"></fn-button>
+      </div>
+    </div>
+
+    <section id="employee_section">
+
+      <fn-table [config]='config' [rowMetaArray]='rowMetaArray' [dataArray]='dataArray'>
+
+      </fn-table>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputPhone">Phone</label>
+          <fn-input [(ngModel)]="user.email" [dataKey]="'email'" required [parentForm]="loginForm" name="Phone">
+          </fn-input>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputPosition">Position</label>
+          <fn-input [(ngModel)]="user.email" [dataKey]="'email'" required [parentForm]="loginForm" name="Position">
+          </fn-input>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class="col">
+        <label for="exampleInputPosition">Username</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col">
+        <label for="exampleInputPosition">Recipient Name</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+            aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">@example.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="exampleInputPosition">Ammount in $</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class="col-12">
+        <h5>Rounded Input Box</h5>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputPassword">Password</label>
+          <fn-input [(ngModel)]="user.password" [dataKey]="'password'" required [parentForm]="loginForm"
+            name="Password"> </fn-input>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputConfirmPassword">Confirm Password</label>
+          <fn-input [(ngModel)]="user.email" class="input-rounded" [dataKey]="'confirmPassword'" required
+            [parentForm]="loginForm" name="Confirm Password"> </fn-input>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label>Select country</label>
+          <fn-select [parentForm]="loginForm" [labelKey]="'name'" [inputKey]="'name'" [optionList]="accounts"
+            [(ngModel)]="selectedAccount" [name]="'Name'" [groupBy]="'country'" required>
+          </fn-select>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control input-rounded" id="exampleInputPassword1" name="passwordd"
+            placeholder="Password">
+        </div>
+
+      </div>
+    </div> -->
+  </div>
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+      <div class="col-12">
+        <h2>Switch Button</h2>
+      </div>
+      <div class="col">
+        <fn-switch [(ngModel)]="user.isActive" name="isActive" [checkedTemplate]="checkedTemplate"
+          [unCheckedTemplate]="unCheckedTemplate"></fn-switch>
+        <ng-template #checkedTemplate>
+          <i class="fa fa-pencil"></i> Good
+        </ng-template>
+        <ng-template #unCheckedTemplate>
+          <i class="fa fa-pencil"></i> Bad
+        </ng-template>
+      </div>
+      <div class="col">
+        <fn-switch name="isActive" [checkedTemplate]="Show" [unCheckedTemplate]="Hide"></fn-switch>
+        <ng-template #Show>
+          Show
+        </ng-template>
+        <ng-template #Hide>
+          Hide
+        </ng-template>
+      </div>
+      <div class="col">
+        <fn-switch name="isActive" [checkedTemplate]="Open" [unCheckedTemplate]="Close"></fn-switch>
+        <ng-template #Open>
+          Open
+        </ng-template>
+        <ng-template #Close>
+          Close
+        </ng-template>
+      </div>
+      <div class="col">
+        <fn-switch name="isActive" [checkedTemplate]="Enable" [unCheckedTemplate]="Disable"></fn-switch>
+        <ng-template #Enable>
+          Enable
+        </ng-template>
+        <ng-template #Disable>
+          Disable
+        </ng-template>
+      </div>
+      <div class="col">
+        <fn-switch name="isActive" [checkedTemplate]="" [unCheckedTemplate]=""></fn-switch>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="container">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h2>Button</h2>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-success"><i class="fa fa-save fa-fw"></i>Save</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Add</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-primary btn-round"><i class="fa fa-pencil fa-fw"></i>Update</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-secondary btn-round"><i class="fa fa-hourglass fa-fw"></i>Pending</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-danger btn-square"><i class="fa fa-times fa-fw"></i>Cancel</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-info btn-square">Next<i class="fa fa-arrow-right  fa-fw"></i></button>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <button class="btn btn-xs btn-success"><i class="fa fa-save fa-fw"></i>Save</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-xs btn-primary"><i class="fa fa-plus fa-fw"></i>Add</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-lg btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-lg btn-primary btn-round"><i class="fa fa-pencil fa-fw"></i>Edit</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-round"><i class="fa fa-hourglass fa-fw"></i>Pending</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-primary btn-round"><i class="fa fa-times fa-fw"></i>Cancel</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-success btn-round">Next<i class="fa fa-arrow-right  fa-fw"></i></button>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+</form>
+
+<!--<ng-template #icon>-->
+<!--<div style="padding: 0 10px">-->
+<!--<fn-icon [lib]="'fa'" [style]="'fa'">home</fn-icon>-->
+<!--<div>Button</div>-->
+<!--</div>-->
+<!--</ng-template>-->

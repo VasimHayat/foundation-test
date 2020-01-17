@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { FnMenuItemState } from '../models/fn-menu.state';
+import { FnMenuItemState } from '../..';
 export declare enum FnMenuActionType {
     InitMenuState = "[FnMenu] initialize Menu State",
     LoadMenuData = "[FnMenu] Load Menu Data",

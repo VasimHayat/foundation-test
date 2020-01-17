@@ -1,0 +1,75 @@
+@import "../component/switch/fn-switch.component";
+@import "../theme/variable";
+@import "../theme/mixins";
+
+$labelWidth: 50%;
+
+.switch {
+  position: relative;
+  margin: 20px auto;
+  height: 35px;
+  width: $labelWidth * 2;
+  background: rgba($black, 0.5);
+  @include radius(20px);
+  @include box-shadow(inset 0 1px 3px rgba($black, 0.3), 0 1px rgba($white, 0.1));
+  .switch-input {
+    display: none;
+
+    &:checked + .switch-label {
+      font-weight: bold;
+      color: rgba($black, 0.65);
+      text-shadow: 0 1px rgba($white, 0.25);
+      @include transition(0.15s ease-out);
+    }
+
+    &:checked + .switch-label-on ~ .switch-selection {
+      left: $labelWidth; /* Note: left: 50% doesn't transition in WebKit */
+    }
+  }
+  .switch-label {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: $labelWidth;
+    line-height: 35px;
+    font-size: 15px;
+    color: rgba($white, 0.9);
+    text-align: center;
+    text-shadow: 0 1px 1px rgba($black, 0.45);
+    cursor: pointer;
+    font-weight: normal;
+    &:active {
+      font-weight: bold;
+    }
+  }
+  .switch-label-off {
+    @include padding-direction(left, 0px);
+  }
+  .switch-label-on {
+    @include padding-direction(right, 0px);
+  }
+  .switch-selection {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    left: 0px;
+    width: $labelWidth;
+    height: 35px;
+    background: $white;
+    @include radius(16px);
+    //@include linear-gradient(top, $switch-gradient, $white);
+    @include box-shadow(inset 10px 8px rgba($white, 0.5), 3px 3px 6px rgba($black, 0.2));
+    @include transition(left 0.15s ease-out);
+
+    &.switch-blue {
+      background: $blue;
+      @include linear-gradient(top, $blue, $cyan);
+    }
+
+    &.switch-yellow {
+      background: $yellow;
+      @include linear-gradient(top, $yellow, $orange);
+    }
+  }
+}

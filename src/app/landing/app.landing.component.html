@@ -1,0 +1,14 @@
+<nav class="navbar main-header navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand">Hubworks</a>
+  </nav>
+  
+  <fn-menu-sidebar></fn-menu-sidebar>
+  <section  *ngIf="isMenuLoaded" class="content-wrapper main-content" id="main-content">
+    <div class="container-fluid">
+      <h2 class="display-4">Angualr Foundation Freamwork
+        <button class="btn btn-primary" (click)="openCngMdl()">Lauch Demo Dialog</button>
+      </h2>
+      <router-outlet></router-outlet>
+  </div>
+  </section>
+  

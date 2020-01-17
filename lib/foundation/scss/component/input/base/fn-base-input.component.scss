@@ -1,0 +1,59 @@
+@import "../../../theme/variable";
+@import "../../../theme/mixins";
+fn-input {
+  position: relative;
+  width: 100%;
+  float: left;
+  fn-base-input {
+    .fn-input-box {
+      position: relative;
+      input.fn-input,
+      input.form-control {
+        box-sizing: border-box;
+        width: 100%;
+        height: 34px;
+        @include border(1px, solid, $border-default-color);
+        @include shadow-reset;
+        background-color: $white;
+        color: $input-text-color;
+        outline: none;
+        @include padding(6px 12px 6px 12px);
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-image: none;
+        @include transition(all 0.2s linear);
+        @include radius(4px);
+        display: inline-block;
+        position: relative;
+        &:focus, &:visited, &:active{
+          border-color: $input-focus-border-color;
+        }
+        &[disabled] {
+          color: $input-disable-color;
+          background-color: $input-disable-bg;
+          cursor: not-allowed;
+          opacity: 1;
+        }
+        &:placeholder-shown {
+          text-overflow: ellipsis;
+          color: $input-placeholder-color;
+        }
+        &::placeholder {
+          color: $input-placeholder-color;
+        }
+        &.input-rounded {
+          @include radius(25px);
+        }
+        
+      }
+      textarea.fn-input {
+        max-width: 100%;
+        height: auto;
+        min-height: 32px;
+        line-height: 1.5;
+        vertical-align: bottom;
+        transition: all 0.3s, height 0s;
+      }
+    }
+  }
+}

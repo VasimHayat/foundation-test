@@ -1,6 +1,6 @@
 {
   "name": "foundation",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^8.2.0",
     "@angular/core": "^8.2.0",
@@ -13,9 +13,9 @@
     "stacktrace-js": "^2.0.1",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
     "immutable": "^4.0.0-rc.12",
-    "ngx-color-picker": "^8.2.0"
+    "ngx-color-picker": "^8.2.0",
+    "@ngx-translate/core": "^11.0.0"
   },
   "main": "bundles/foundation.umd.js",
   "module": "fesm5/foundation.js",

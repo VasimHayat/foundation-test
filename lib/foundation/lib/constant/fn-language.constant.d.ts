@@ -8,42 +8,42 @@ export declare class FnLangConstant {
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
         es: {
             langCode: string;
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
         fr: {
             langCode: string;
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
         zh: {
             langCode: string;
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
         it: {
             langCode: string;
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
         de: {
             langCode: string;
             flag: string;
             icon: string;
             name: string;
-            descriptoin: string;
+            description: string;
         };
     };
     static readonly APP_LANGUAGES: {
@@ -51,6 +51,6 @@ export declare class FnLangConstant {
         flag: string;
         icon: string;
         name: string;
-        descriptoin: string;
+        description: string;
     }[];
 }

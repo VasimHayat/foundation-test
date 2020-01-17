@@ -1,0 +1,33 @@
+@import "../../theme/variable";
+@import "../../theme/mixins";
+#fn-search-input {
+  @include padding-reset;
+  border: solid 1px $border-default-color;
+  @include radius(6px);
+  background-color: $white;
+
+  input {
+    @include border-reset;
+    box-shadow: none;
+  }
+
+  button {
+    @include margin-reset;
+    background: none;
+    box-shadow: none;
+    @include border-reset;
+    color: $gray;
+    @include padding(4px 8px 4px 10px);
+    border-left: solid 1px $border-default-color;
+
+    &:hover {
+      @include border-reset;
+      box-shadow: none;
+      border-left: solid 1px $border-default-color;
+    }
+  }
+
+  .glyphicon-search {
+    font-size: 23px;
+  }
+}

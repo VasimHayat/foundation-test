@@ -1,0 +1,76 @@
+@import "../../theme/variable";
+@import "../../theme/mixins";
+
+fn-color-picker {
+  input.fn-color-picker-border {
+    height: 19px;
+    width: 19px;
+    cursor: pointer;
+    border: none;
+  }
+
+  color-picker {
+    .color-picker {
+      @include shadow(5px, 5px, 10px, rgba(0, 0, 0, 0.1));
+      @include border-reset;
+      @include radius(5px);
+      z-index: 1;
+      @include padding(2px 2px 2px 2px);
+
+      .arrow {
+        &.arrow-right-top {
+          bottom: 4px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) $white rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &.arrow-right-bottom {
+          top: 4px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) $white rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        }
+
+        &.arrow-left-top {
+          bottom: 4px;
+          right: -20px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $white;
+        }
+
+        &.arrow-left-bottom {
+          top: 4px;
+          right: -20px;
+          border-width: 6px 10px;
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $white;
+        }
+      }
+
+      .hue-alpha {
+        .left {
+          @include padding(0);
+
+          .selected-color {
+            top: 0;
+            left: 0;
+          }
+        }
+
+        .right {
+          @include padding(0 0 0 10px);
+        }
+      }
+
+      .button-area {
+        @include padding(0 9px 9px);
+        text-align: inherit;
+        float: left;
+        width: 100%;
+
+        button {
+          min-width: 80px;
+          @include padding(5px 10px);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+@import "../component/table/fn-table.component";
+@import "../theme/mixins";
+@import "../theme/variable";
+table.table {
+  background-color: $white;
+  color: $table-text-color;
+  .table-shadow {
+    @include shadow(3px, 5px, 10px, $table-shadow);
+  }
+  thead {
+    &.grey.lighten-2 {
+      background-color: $gray-head-bg;
+    }
+    &.black.white-text {
+      background-color: $black !important;
+      tr {
+        th {
+          color: $white !important;
+        }
+      }
+    }
+    tr {
+      th {
+        font-size: 0.9em;
+        @include padding(8px 10px 8px 10px);
+        border: 0 !important;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        font-size: 0.9em;
+        font-weight: normal;
+        padding: 8px 10px !important;
+      }
+      th {
+        font-size: 0.7em;
+        padding: 8px 10px !important;
+      }
+    }
+  }
+  &.table-bordered {
+    th,
+    td {
+      border: 1px solid $table-border-color;
+    }
+  }
+  th,
+  td {
+    border-top: 1px solid $table-border-color;
+  }
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(odd) {
+        background-color: $table-stripped-bg;
+      }
+    }
+  }
+  &.table-hover {
+    tbody {
+      tr:hover {
+        background-color: $table-hover-bg !important;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+      }
+    }
+  }
+}
