@@ -30,7 +30,7 @@
     "font-awesome": "^4.7.0",
     "foundation": "file:./lib/foundation",
     "immutable": "^4.0.0-rc.12",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-color-picker": "^8.2.0",
     "rxjs": "~6.4.0",
     "stacktrace-js": "^2.0.2",
